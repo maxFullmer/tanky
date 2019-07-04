@@ -1,0 +1,12 @@
+[
+    {
+        "tankArmory": "[]",
+        "id": 0,
+        "tankName": "",
+        "tankOwner": "",
+        "pH": 7,
+        "NH3": 0,
+        "temperature": 68,
+        "salinity": 0
+    }
+]
