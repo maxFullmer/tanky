@@ -1,68 +1,80 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Student can write a functioning react application
+- Student can write a functioning Express API
+- Student can request data from Express API
+- Student can display data from Express API
 
-## Available Scripts
+# frontend checklist
 
-In the project directory, you can run:
+- reset.css
+- update package.json
+  - main: server => so we can type nodemon without giving file
 
-### `npm start`
+### proxy
+- setupProxy.js
+  - port: 3008
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### dependencies
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- axios
+- http-proxy-middleware
 
-### `npm test`
+### front-end folder-structure
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- src/
+  - App.js
+  - index.js
+  - components/
+    - header.js (stateless)
+    - TankCard.js (Stateful)
+        - ManagementCenter.js (Stateful)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# backend checklist
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### server folder-structre
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- server/
+	- index.js
+	- controllers
+		- tankController.js
+		- managementController.js (if time)
 
-### `npm run eject`
+### dependencies
+- express
+- axios (used more for interacting with servers on backend, but in this case in on front end)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### routes
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**tankController.js**
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+get: '/api/tankStats'
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+post: '/api/tankArmory'
 
-## Learn More
+put: '/api/tankStats/:id'
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+delete: '/api/tankArmory/:id'
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**managementController.js**
 
-### Code Splitting
+get: '/api/managerList'
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+post: '/api/managerList'
 
-### Analyzing the Bundle Size
+put: '/api/managerList/:name'
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+delete 'api/managerList/:name'
 
-### Making a Progressive Web App
+### data
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```js
+{
+  id,
+  tankName,
+  tankOwner,
+  pH,
+  NH3,
+  temperature,
+  salinity
+}
+```
