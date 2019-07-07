@@ -1,80 +1,78 @@
-- Student can write a functioning react application
-- Student can write a functioning Express API
-- Student can request data from Express API
-- Student can display data from Express API
+Tanky is an application for managing aquarium tank data belonging to multiple clients. It was developed with React and utilized an Express API.
 
-# frontend checklist
+### Data Strucure
 
-- reset.css
-- update package.json
-  - main: server => so we can type nodemon without giving file
+```js
+[
+    {
+        "owner": "default",
+        "ownerID": 0,
+        "tankArmory": [
+            {
+        "tankID": 1,
+        "tankName": "Tank 1",
+        "pH": 7,
+        "NH3": 0,
+        "temperature": 68,
+        "salinity": 0
+            }
+        ]
+    }
+]
+```
 
+### React Component Structure
+
+  - App.js (Stateful)
+    <!-- - Header.js -->
+    - OwnerCard.js
+      - ProfilePicture.js (Stateful)
+      - Tank.js
+      - StatControls.js (Stateful)
+
+stateful ideas: have tank change background image or color
 ### proxy
+
 - setupProxy.js
   - port: 3008
 
 ### dependencies
 
+- express
 - axios
 - http-proxy-middleware
 
-### front-end folder-structure
-
-- src/
-  - App.js
-  - index.js
-  - components/
-    - header.js (stateless)
-    - TankCard.js (Stateful)
-        - ManagementCenter.js (Stateful)
-
-
-# backend checklist
-
-### server folder-structre
-
-- server/
-	- index.js
-	- controllers
-		- tankController.js
-		- managementController.js (if time)
-
-### dependencies
-- express
-- axios (used more for interacting with servers on backend, but in this case in on front end)
-
-### routes
-
-**tankController.js**
-
-get: '/api/tankStats'
-
-post: '/api/tankArmory'
-
-put: '/api/tankStats/:id'
-
-delete: '/api/tankArmory/:id'
+## API Routes
 
 **managementController.js**
 
-get: '/api/managerList'
+### Owner
 
-post: '/api/managerList'
+get:
+  - '/api/owners'
+  - '/api/next-owner'
+  - '/api/prev-owner'
 
-put: '/api/managerList/:name'
+post:
+  - '/api/owner'
 
-delete 'api/managerList/:name'
+put:
+  - '/api/owner/:name'
 
-### data
+delete:
+  - '/api/owner'
 
-```js
-{
-  id,
-  tankName,
-  tankOwner,
-  pH,
-  NH3,
-  temperature,
-  salinity
-}
-```
+### Tank
+
+post:
+  - '/api/owner/tankArmory'
+
+put:
+  - '/api/owner/tankArmory/:id/:newName'
+
+delete:
+  - '/api/owner/tankArmory/:id'
+
+### Stats
+
+COMING SOON!

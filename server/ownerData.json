@@ -1,11 +1,11 @@
 [
     {
-        "owner": "default",
+        "owner": "Owner",
         "ownerID": 0,
         "tankArmory": [
             {
         "tankID": 1,
-        "tankName": "Tank 1",
+        "tankName": "TANK 1",
         "pH": 7,
         "NH3": 0,
         "temperature": 68,
