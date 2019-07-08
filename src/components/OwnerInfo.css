@@ -1,8 +1,6 @@
 .ownerCard {
-    background-color: cornsilk;
     height: 100%;
-    width: 100vw;
-    padding: 20px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -11,16 +9,27 @@
 
 .tanks {
     background-color: aquamarine;
-    margin: 20px; 
-    height: fit-content;
-    width: 30%;
+    margin-top: 20px;
+    margin-bottom: 20px; 
+    height: 35vh;
+    width: 37%;
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     min-width: fit-content;
 }
 
+.tanks .nameAlign {
+    align-self: flex-end;
+    font-size: 1.5em;
+}
+
 .newTank {
+    height: 35vh;
     margin: 20px; 
     font-size: 4em;
-    width: 40%;
+    width: 37%;
     display: flex;
     flex-direction: column-reverse;
     justify-content: baseline;

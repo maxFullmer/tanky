@@ -1,7 +1,6 @@
 const ownerData = require('../ownerData.json');
-//don't change these VVV
 
-let currentOwner = 0;
+//don't change these VVV
 let ownerID = 0;
 let tankID = 2;
 
@@ -47,11 +46,12 @@ module.exports = {
 
     // Tank operations
     createTank: (req, res, next) => {
-        const {tankName} = req.body;
+        const currentOwner = req.params.id;
+        const {newTank} = req.body;
         
         ownerData[currentOwner].tankArmory.push({
             tankID: tankID,
-            tankName,
+            tankName: newTank,
             ph: 7,
             NH3: 0,
             temperature: 68,
@@ -61,23 +61,21 @@ module.exports = {
         res.status(200).send(ownerData);
     },
 
-    updateTankName: (req, res, next) => {
-        const targetTankID = req.params.id;
-        const newTankName = req.params.newName
-        ownerData[currentOwner].tankArmory[targetTankID].tankName = `${newTankName}`;
-        res.status(200).send(ownerData);
-    },
+    // updateTankStats: (req, res, next) => {
+    //     const targetTankID = req.params.id;
+    //     const tankToUpdate = ownerData[currentOwner].tankArmory.findIndex(tank => tank.tankID == targetTankID)
+
+    //     ownerData[currentOwner].tankArmory.splice(tankToUpdate,1);
+        
+    //     res.status(200).send(ownerData);
+    // },
 
     deleteTank: (req, res, next) => {
-        const targetTankID = req.params.id;
-        ownerData[currentOwner].tankArmory.splice(targetTankID,1);
+        const currentOwner = req.params.id;
+        const targetTankID = req.params.tankID;
+        const tankToDelete = ownerData[currentOwner].tankArmory.findIndex(tank => tank.tankID == targetTankID)
+        ownerData[currentOwner].tankArmory.splice(tankToDelete,1);
         res.status(200).send(ownerData);
     },
 
-    // Stat operations
-    // updateStats: (req, res, next) => {
-    //     const {pH, NH3, temperature, salinity} = req.body;
-
-    //     if (pH)
-    // }
 }

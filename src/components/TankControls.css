@@ -6,9 +6,10 @@
 }
 
 .flex-item {
-    margin: 5px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
 }
 
 .flex-item span {

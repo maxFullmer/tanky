@@ -1,3 +1,8 @@
+.page-wrapper {
+  height: 100%;
+  width: 100vw;
+}
+
 .owner-nav {
   height: 5vh;
   background-color: aqua;
@@ -30,6 +35,7 @@
 }
 
 .main-fill {
-  height: 100vh;
-  background-color: cornsilk;
+  background-image: url('./tankPebbles.jpg');
+  background-repeat: repeat;
+  min-height: 100vh;
 }

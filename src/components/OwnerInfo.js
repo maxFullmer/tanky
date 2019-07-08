@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import TankControls from './TankControls.js';
-// import './reset.css';
 import '../reset.css';
 import './OwnerInfo.css';
-import axios from 'axios';
+// import axios from 'axios';
 
 class OwnerInfo extends Component {
     constructor(props) {
@@ -13,37 +12,33 @@ class OwnerInfo extends Component {
         };
     }
 
-    addTank() {
-        const newTank = {
-            tankName: this.state.tankName
-        }
-        axios
-        .post('/api/owner/tankArmory', newTank)
-        .then(response => {
-            this.setState({
-              ownerData: response.data
-            })
-          })
-        .catch(err => console.log(err))
-      }
-
     render() {
-        let {ownerData, currentOwner} = this.props;
+        let {ownerData, currentOwner, addTank, deleteTank} = this.props; 
         let mappedTanks = ownerData[currentOwner].tankArmory.map((tank, index) => {
             return <div key={index} className="tanks">
+                        <div className="nameAlign">{tank.tankName}</div>
                         <div>Tank id: {tank.tankID}</div>                        
-                        <div>{tank.tankName}</div>
                         <div>pH: {tank.pH}</div>
-                        <div>NH3: {tank.NH3}</div>
-                        <div>Temp: {tank.temperature}</div>
-                        <div>Sal: {tank.salinity}</div>
-                        <TankControls ownerData={ownerData} currentOwner={currentOwner}/>
+                        <div>NH3: {tank.NH3}%</div>
+                        <div>Temp: {tank.temperature} F</div>
+                        <div>Sal: {tank.salinity}ppt</div>
+                        <TankControls 
+                            ownerData={ownerData} 
+                            currentOwner={currentOwner} 
+                            tankID={tank.tankID}
+                            deleteTank={deleteTank}
+                            // pH={ownerData[currentOwner].tankArmory[tank].pH}
+                            // NH3={ownerData[currentOwner].tankArmory[tank].NH3}
+                            // temperature={tank.temperature}
+                            // salinity={tank.salinity}
+
+                        />
                     </div>
         })
+
         return (
             <div>
                 <div className="ownerCard">
-
                     {mappedTanks}
                     <div className="newTank">
                         <input 
@@ -52,7 +47,7 @@ class OwnerInfo extends Component {
                         onChange={event => this.setState({ tankName: event.target.value })}
                         value={this.state.tankName}
                         />
-                        <button onClick={() => this.addTank()}>+</button>
+                        <button onClick={() => addTank(currentOwner, this.state.tankName)}>+</button>
                     </div>
                 </div>
             </div>

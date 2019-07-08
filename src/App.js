@@ -3,7 +3,6 @@ import './reset.css';
 import './App.css';
 import Header from './components/Header.js';
 import OwnerInfo from './components/OwnerInfo.js';
-// import ControlCenter from './components/ControlCenter.js';
 import axios from 'axios';
 
 
@@ -29,8 +28,9 @@ class App extends Component {
         }
       ],
       currentOwner: 0,
-      newName: ""
+      newOwnerName: ""
     }
+
   }
 
   componentDidMount() {
@@ -47,6 +47,8 @@ class App extends Component {
     })
     .catch(err => console.log(err));
   }
+
+  //OWNER FUNCTIONALITY
 
   getNextOwner() {
     if (this.state.currentOwner < this.state.ownerData.length-1) {
@@ -72,12 +74,12 @@ class App extends Component {
           ownerData: response.data
         })
       })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
   }
 
-  updateOwner(id, newName) {
+  updateOwner(id, newOwnerName) {
     axios
-    .put(`/api/owner/${id}/${newName}`)
+    .put(`/api/owner/${id}/${newOwnerName}`)
     .then(response => {
       this.setState({
         ownerData: response.data
@@ -107,12 +109,34 @@ class App extends Component {
   }
   }
 
+  //TANK FUNCTIONALITY
+
+  addTank = (id, newTank) => {
+    axios
+    .post(`/api/owner/${id}/tankArmory`, {newTank})
+    .then(response => {
+        this.setState({
+          ownerData: response.data
+        })
+      })
+    .catch(err => console.log(err))
+}
+
+  deleteTank = (id, tankID) => {
+    axios
+    .delete(`/api/owner/${id}/tankArmory/${tankID}`)
+    .then(response => {
+      this.setState({
+        ownerData: response.data
+      })
+    })
+  .catch(err => console.log(err))
+  }
+
   render() {
-    let {ownerData, currentOwner, newName, owner} = this.state;
-    console.log(currentOwner)
-    console.log(owner)
+    let {ownerData, currentOwner, newOwnerName} = this.state;
     return (
-      <div>
+      <div className="page-wrapper">
         <header>
           <Header />
           <nav className="owner-nav">
@@ -127,16 +151,18 @@ class App extends Component {
             <input 
             tpye="text"
             placeholder="Change name here, then click below..."
-            onChange={event => this.setState({ newName: event.target.value })}
-            value={newName}
+            onChange={event => this.setState({ newOwnerName: event.target.value })}
+            value={newOwnerName}
             />
-            <div onClick={() => this.updateOwner(currentOwner, newName)}>{ownerData[currentOwner].owner}</div>
+            <div onClick={() => this.updateOwner(currentOwner, newOwnerName)}>{ownerData[currentOwner].owner}</div>
             <button onClick={() => this.deleteOwner(currentOwner)}>Sever Relationship</button>
           </div>  
         
           <OwnerInfo 
             ownerData={this.state.ownerData}
             currentOwner={this.state.currentOwner}
+            addTank={this.addTank}
+            deleteTank={this.deleteTank}
           />
         </main>
       </div>
